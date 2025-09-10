@@ -64,7 +64,7 @@ def run_newton_raphson(polynomial_coefficients, starting_point, tolerance, maxim
     # highetst power is x^1 -> no second derivative
     if len(polynomial_coefficients) < 3:
         print("Error, second derivative of the polynomial must be greater than zero.")
-        return
+        return [ [],[] ]
 
     X = [starting_point]
     F = [get_polynomial_value(starting_point,polynomial_coefficients)]
@@ -72,6 +72,7 @@ def run_newton_raphson(polynomial_coefficients, starting_point, tolerance, maxim
     for j in range(1,maximum_number_of_iterations):
         f_prime = get_polynomial_value(X[j-1],differentiate_polynomial(polynomial_coefficients,1))
         f_bizz = get_polynomial_value(X[j-1],differentiate_polynomial(polynomial_coefficients,2))
+
         # x(j +1)
         x_next = step_newton_raphson(X[j-1], f_prime, f_bizz)
         X.append(x_next)
@@ -94,6 +95,12 @@ def run_newton_raphson(polynomial_coefficients, starting_point, tolerance, maxim
 # Then uncomment the line below and implement the function:
 def plot_iterations(polynomial_coefficients,iterations):
     X,F = iterations
+
+    #If f_bizz = 0
+    #Need only to check one list, both are set to empty
+    if len(X) == 0:
+        return
+
     #Newton-Raphson points
     plt.plot(X, F, 'o', color= 'blue')
 
@@ -109,6 +116,12 @@ def plot_iterations(polynomial_coefficients,iterations):
     plt.title("Newton-raphson's method")
     plt.show()
 
+
+
+
+
+
+
 # ============================================
 # Main loop
 # ============================================
@@ -117,6 +130,8 @@ tolerance = 0.00001
 maximum_number_of_iterations = 10
 
 polynomial_coefficients = [10,-2,-1,1]
+#Error case, works!
+#polynomial_coefficients = [10,-2]
 starting_point = 2
 
 # ToDo: Uncomment the two lines below, once you have implemented the functions above:
