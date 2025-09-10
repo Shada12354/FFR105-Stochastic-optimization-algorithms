@@ -47,7 +47,8 @@ def differentiate_polynomial(polynomial_coefficients, derivative_order):
 
 # Uncomment the line below and implement the function:
 def step_newton_raphson(x, f_prime, f_double_prime):
-    #x(j+1)
+    #x_(j+1) = x_next
+    #x_j = x
     x_next = x - (f_prime / f_double_prime)
     return x_next
 
@@ -59,7 +60,7 @@ def step_newton_raphson(x, f_prime, f_double_prime):
 
 # Uncomment the line below and implement the function:
 def run_newton_raphson(polynomial_coefficients, starting_point, tolerance, maximum_number_of_iterations):
-    #If lenngth of polynomial coefficients < 3:
+    #If length of polynomial coefficients < 3:
     # highetst power is x^1 -> no second derivative
     if len(polynomial_coefficients) < 3:
         print("Error, second derivative of the polynomial must be greater than zero.")
@@ -81,12 +82,6 @@ def run_newton_raphson(polynomial_coefficients, starting_point, tolerance, maxim
             break
 
     return [X, F]
-
-
-
-
-
-
 
 # ============================================
 # plot_iterations:
@@ -113,12 +108,6 @@ def plot_iterations(polynomial_coefficients,iterations):
     plt.ylabel("f(x)")
     plt.title("Newton-raphson's method")
     plt.show()
-
-
-
-
-
-
 
 # ============================================
 # Main loop
